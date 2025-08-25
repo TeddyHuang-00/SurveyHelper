@@ -12,6 +12,7 @@ wheels/
 # Output files
 *.pdf
 *.json
+*.csv
 
 # Log files
 *.log
