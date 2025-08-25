@@ -225,7 +225,9 @@ class CSVExporter:
             return
 
         # Create filtered filename
-        filtered_file = self.output_file.with_suffix(f"{output_suffix}.csv")
+        filtered_file = self.output_file.with_stem(
+            f"{self.output_file.stem}{output_suffix}"
+        )
 
         # Use the same export function with filtered results
         temp_exporter = CSVExporter(str(filtered_file))
