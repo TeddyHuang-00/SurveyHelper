@@ -195,11 +195,20 @@ class Config(BaseSettings):
     app: AppConfig = Field(default_factory=AppConfig)
 
     model_config = SettingsConfigDict(
+        case_sensitive=False,
+        nested_model_default_partial_update=True,
+        # Command-line interface settings
         cli_parse_args=True,
         cli_kebab_case=True,
-        case_sensitive=False,
         cli_hide_none_type=True,
         cli_use_class_docs_for_groups=True,
         cli_avoid_json=True,
         cli_implicit_flags=True,  # Allow implicit flags for boolean fields
+        cli_enforce_required=True,
+        # Environment variable settings
+        env_file=".env",
+        env_file_encoding="utf-8",
+        env_ignore_empty=True,
+        env_nested_delimiter="__",  # Support nested env vars like LLM__MODEL_NAME
+        env_parse_enums=True,
     )

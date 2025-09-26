@@ -13,9 +13,13 @@ wheels/
 *.pdf
 *.json
 *.csv
+data/
 
 # Log files
 *.log
 
 # Coding agents
 CLAUDE.md
+
+# env files
+.env
