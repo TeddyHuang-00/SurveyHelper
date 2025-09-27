@@ -10,6 +10,11 @@ class CSVExporter:
         self.output_file = Path(output_file)
         self.logger = logging.getLogger(f"paper_relevance.{self.__class__.__name__}")
 
+        # Ensure output directory exists
+        if not self.output_file.parent.exists():
+            self.output_file.parent.mkdir(parents=True, exist_ok=True)
+            self.logger.info(f"Created directory: {self.output_file.parent}")
+
     def export_results(self, results: list[PaperRelevanceResult]) -> None:
         """Export relevance results to CSV file"""
         fieldnames = [
@@ -23,7 +28,7 @@ class CSVExporter:
             "file_source",
         ]
 
-        with open(self.output_file, "w", newline="", encoding="utf-8") as csvfile:
+        with self.output_file.open("w", newline="", encoding="utf-8") as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
 
